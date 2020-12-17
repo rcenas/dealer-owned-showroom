@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 
- const Home: React.FC = () => {
+export default class Home extends Component{
+  render() {
     return (
       <View>
-        <Text>Welcome to typeScript!</Text>
+        <Text> Welcome to home screen! </Text>
       </View>
     )
+  }
 }
-
-export default Home;
