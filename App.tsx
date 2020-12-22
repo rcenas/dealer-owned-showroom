@@ -12,6 +12,7 @@ import Index from './app/index';
       // <Provider store={this.state.store}>
       //   <Home />  
       // </Provider>
+      
           <Index />
      )
    }
