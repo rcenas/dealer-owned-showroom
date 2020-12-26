@@ -8,7 +8,7 @@ import Dashboard from './components/dashboard/Dashboard';
 interface Props { 
 }
 
-  let backCounter: 0
+let backCounter: number = 0;
 export default class Index extends Component<Props> {
   componentDidMount() {
     StatusBar.setBarStyle('light-content', true)
@@ -40,7 +40,7 @@ export default class Index extends Component<Props> {
             component={SplashScreen}
             title='splashScreen'
             hideNavBar
-            initial
+            // initial
             type={ActionConst.RESET}
             statusBarStyle='light-content'
           />
@@ -48,6 +48,7 @@ export default class Index extends Component<Props> {
             key='dashboard'
             component={Dashboard}
             hideNavBar
+            initial
             panHandlers={null}
             type={ActionConst.RESET}
             statusBarStyle='light-content'/>
