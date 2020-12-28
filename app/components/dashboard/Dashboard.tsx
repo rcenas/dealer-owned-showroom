@@ -1,16 +1,29 @@
 import React, { Component } from 'react';
-import { FlatList, ScrollView, Text, View } from 'react-native';
-import { Body, Button, Card, CardItem, Container, Header, Icon, Input, Item, Left, Right, Thumbnail } from 'native-base';
+import { FlatList, ScrollView, Text, TouchableHighlight, View } from 'react-native';
+import { Body, Button, Card, CardItem, Container, Header, Icon, Input, Item, Left, List, ListItem, Right, Thumbnail } from 'native-base';
 import { COLOR_PRIMARY, COLOR_SECONDARY } from '../global/globalFile';
+import { Actions } from 'react-native-router-flux';
 
 
 interface Props {}
 interface State {
   searchClick: boolean;
 }
+interface Vehicle{
+  id: number;
+  image: any;
+  year: string;
+  make: string;
+  model: string;
+  mileage: string;
+  stockNo: string;
+  vin: string; 
+}
 
-let vehicle = [{
+// interface VehicleList extends Array<Vehicle>{ }
+let vehicle: Array<Vehicle> = [{
   id: 1,
+  image:  require('../../assets/1.jpg'),
   year: '2005',
   make: 'Chrysler',
   model: 'PT Cruiser',
@@ -18,7 +31,8 @@ let vehicle = [{
   stockNo: '205866A',
   vin: '3C4FY48B95T575563'
 }, {
-  id: 2,
+    id: 2,
+    image: require('../../assets/2.jpg'),
   year: '2017',
   make: 'Hyundai',
   model: 'Santa Fe Sport',
@@ -30,34 +44,36 @@ export default class Home extends Component<Props, State>{
   constructor(props: Props) {
     super(props)
     this.state = {
-      searchClick: false
+      searchClick: true,
     }
   }
   componentDidMount() {
 
   }
-  renderRow(item: any) {
-    return (<View style={{flex: 1}} key={item.id.toString()}>
-      <Card>
-        <CardItem>
-          <Text>
-            Sample
-          {/* {item.year}{item.make} */}
-      </Text>
-          </CardItem>
-          </Card>
-    </View>)
+  _renderRow(item: Vehicle) {
+    console.log(item)
+    return (
+      <TouchableHighlight style={{flex: 1, marginLeft: 5, marginRight: 5}} key={item.id.toString()}>
+        <View style={{flex: 1}}>
+          {/* <View style={{ flex: 1}}> */}
+            <View style={{marginLeft: 5, marginTop: 5, marginBottom: 5}}>
+              <Thumbnail large square={true} source={item.image} style={{}} scale={4.3} />
+            </View>
+          {/* </View>      */}
+        </View>    
+      </TouchableHighlight>
+    )
   }
-  // renderVehicleList() {
-  //   return (<FlatList
-  //     keyExtractor={(item, index) => index.toString()}
-  //     data={vehicle}
-  //     contentContainerStyle={{ flexGrow: 1 }}
-  //     windowSize={10}
-  //     renderItem={({ item, index}) => {this.renderRow(item, index)}}
-  //   />)
-  // }
-  render(): JSX.Element {
+  renderVehicleList() {
+    console.log(vehicle)
+    return (<FlatList
+      keyExtractor={(item) => item.id.toString()}
+      data={vehicle}
+      contentContainerStyle={{ flexGrow: 1, paddingBottom: 20 }}
+      renderItem={({ item}) => this._renderRow(item)}
+    />)
+  }
+  render() {
     return (
       <Container>
         <Header style={{ backgroundColor: COLOR_PRIMARY }} searchBar rounded>
@@ -72,12 +88,11 @@ export default class Home extends Component<Props, State>{
             <Icon type='MaterialIcons' name='menu' style={{color: COLOR_SECONDARY}}  />
           </View>
         </Header>
-        {/* {this.renderVehicleList()}    */}
-        <ScrollView style={{ flex: 1 }}>
-          {/* <View style={{flex: 1, backgroundColor: 'gray'}}>
-            <Text>Sample</Text>
-          </View> */}
-        </ScrollView>
+        <View style={{ flex: 1 }}>
+          {this.renderVehicleList()} 
+        
+        </View>
+          
     </Container>
     )
   }
