@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component }  from 'react';
 import {View, Text} from 'react-native';
 import store from './app/store/store';
 import { Provider, connect } from 'react-redux';
-import Index from './app/index';
- class App extends React.Component{
+import Index from './src/index';
+ class App extends Component{
   //  constructor(props: IAppProps)
   //  super(props);
   //    state = { store: store()};
