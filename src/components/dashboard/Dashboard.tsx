@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
-import { FlatList, ScrollView, Text, TouchableHighlight, View } from 'react-native';
-import { Body, Button, Card, CardItem, Container, Header, Icon, Input, Item, Left, List, ListItem, Right, Thumbnail } from 'native-base';
+import { FlatList, ScrollView,  TouchableHighlight, View } from 'react-native';
+import { Body, Button, Card, CardItem, Container, Header, Icon, Input, Item, Left, List, ListItem, Right, Thumbnail, Text, } from 'native-base';
 import { COLOR_PRIMARY, COLOR_SECONDARY } from '../global/globalFile';
 import { Actions } from 'react-native-router-flux';
+import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen'; 
 
 
 interface Props {}
 interface State {
   searchClick: boolean;
 }
-interface Vehicle{
+ interface Vehicle{
   id: number;
   image: any;
   year: string;
@@ -50,17 +51,36 @@ export default class Home extends Component<Props, State>{
   componentDidMount() {
 
   }
-  _renderRow(item: Vehicle) {
+  vehicleInfo(data: any) {
+
+    console.log(data)
+     Actions.vehicleInfo({ vehicleInfo: data});
+  }
+  _renderRow(item: any) {
     console.log(item)
     return (
-      <TouchableHighlight style={{flex: 1, marginLeft: 5, marginRight: 5}} key={item.id.toString()}>
-        <View style={{flex: 1}}>
-          {/* <View style={{ flex: 1}}> */}
-            <View style={{marginLeft: 5, marginTop: 5, marginBottom: 5}}>
-              <Thumbnail large square={true} source={item.image} style={{}} scale={4.3} />
+      <TouchableHighlight style={{ flex: 1, marginLeft: 5, marginRight: 5 }} key={item.id.toString()} onPress={() => this.vehicleInfo(item)}>
+        <>
+          <Card>
+            <View style={{ flex: 1}}>
+            <View style={{flexDirection: 'row'}}>
+                <Left style={{ flex: 1, margin: 5 }}>
+                  <View style={{flex: 1}}>
+                  <Thumbnail large square={true} source={item.image} style={{}} resizeMode={'contain'} width={80} height={80} />
+                  </View>
+            </Left>
+                <Body style={{ flex: 6, marginLeft: 5 }}>
+                <View>
+                  <Text style={{ fontSize: hp('1.5%') }} ellipsizeMode='tail'>{item.year} {item.make} {item.model}</Text>
+                  <Text style={{ fontSize: hp('1.5%') }}>{item.vin}</Text>
+                    <Text style={{ fontSize: hp('1.5%') }}>{item.stockNo}</Text>  
+                  </View>
+                </Body>
+              <Right />
+        </View>
             </View>
-          {/* </View>      */}
-        </View>    
+          </Card>
+        </>
       </TouchableHighlight>
     )
   }

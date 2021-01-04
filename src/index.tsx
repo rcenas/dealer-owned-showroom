@@ -4,7 +4,7 @@ import { ActionConst, Actions, Router, Scene } from 'react-native-router-flux';
 
 import SplashScreen from './components/splash/SplashScreen';
 import Dashboard from './components/dashboard/Dashboard';
-
+import VehicleInfo from './components/dashboard/VehicleInfo';
 interface Props { 
 }
 
@@ -51,7 +51,14 @@ export default class Index extends Component<Props> {
             initial
             panHandlers={null}
             type={ActionConst.RESET}
-            statusBarStyle='light-content'/>
+            statusBarStyle='light-content' />
+                  <Scene
+          key='vehicleInfo'
+          component={VehicleInfo}
+          hideNavBar
+          panHandlers={null}
+          statusBarStyle='light-content'
+        />
         </Scene>
       </Router>
     )
