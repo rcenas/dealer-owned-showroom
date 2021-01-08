@@ -24,7 +24,7 @@ interface State {
 // interface VehicleList extends Array<Vehicle>{ }
 let vehicle: Array<Vehicle> = [{
   id: 1,
-  image:  require('../../assets/1.jpg'),
+  image:  require('../../assets/6.jpg'),
   year: '2005',
   make: 'Chrysler',
   model: 'PT Cruiser',
